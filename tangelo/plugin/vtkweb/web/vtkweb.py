@@ -32,7 +32,7 @@ def initialize():
 
         # Construct a run() function that will mask the restful API and just
         # inform the caller about the configuration problem.
-        def run():
+        def run(*arg, **kw):
             tangelo.http_status(400, "Bad Configuration")
             return {"error": msg}
 
