@@ -70,6 +70,12 @@ module.exports = function (grunt) {
           tangelo: {
               src: ["js/src/**/*.js"]
           },
+          vtkweb: {
+              src: [
+                  "tangelo/plugin/vtkweb/*.js",
+                  "tangelo/plugin/vtkweb/examples/**/*.js"
+                ]
+          },
           test: {
               src: ["js/tests/*.js"]
           }
@@ -83,6 +89,12 @@ module.exports = function (grunt) {
           },
           tangelo: {
               src: ["js/src/**/*.js"]
+          },
+          vtkweb: {
+              src: [
+                  "tangelo/plugin/vtkweb/*.js",
+                  "tangelo/plugin/vtkweb/examples/**/*.js"
+                ]
           },
           test: {
               src: ["js/tests/*.js"]
@@ -146,7 +158,8 @@ module.exports = function (grunt) {
       pep8: {
           files: {
               src: [
-                  "tangelo/**/*.py"
+                  "tangelo/**/*.py",
+                  "tangelo/plugin/vtweb/**/*.py"
               ]
           }
       },
