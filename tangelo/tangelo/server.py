@@ -137,6 +137,42 @@ def analyze_url(raw_reqpath):
     # Form an actual path string.
     path = os.path.sep.join(pathcomp)
 
+    # TODO: compute the requested path's access rights.
+    #
+    # Compute a sequence of directories to check for .access files.
+    dirs = [pathcomp[0]]
+    for comp in pathcomp[1:]:
+        dirs.append(os.path.join(dirs[-1], comp))
+
+    # Start with the global security defaults.
+    #
+    # TODO: read these in from the global configuration.
+    listdir = False
+    showpy = False
+
+    # Look into the directories in reverse order.
+    for directory in reversed(dirs):
+        access_file = os.path.join(directory, ".access")
+        if os.path.isdir(directory) and os.path.exists(access_file):
+            try:
+                access = tangelo.util.yaml_safe_load(access_file)
+            except IOError as e:
+                # TODO: take an appropriate action here.
+                tangelo.log("ERROR", "ERROR")
+            except ValueError as e:
+                # TODO: take an appropriate action here.
+                tangelo.log("ERROR", "ERROR")
+
+            if not isinstance(access, dict):
+                # TODO: take an appropriate action here.
+                tangelo.log("ERROR", "ERROR")
+
+            # TODO: extract and apply the appropriate security values, if any.
+            # If all security values have been determined, then stop here;
+            # otherwise, mark the extracted ones as being set and continue.
+
+            #break
+
     # If the path is a directory, check for a trailing slash.  If missing,
     # perform a redirect to the path WITH the trailing slash.  Otherwise, check
     # for an index.html file in that directory; if found, perform an internal

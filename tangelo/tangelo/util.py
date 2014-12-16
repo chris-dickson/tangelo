@@ -96,6 +96,16 @@ class PluginConfig(object):
         self.plugin_order.remove(name)
 
 
+def yaml_safe_load(filename):
+    try:
+        with open(filename) as f:
+            return yaml.safe_load(f.read())
+    except yaml.YAMLError as e:
+        # Convert all YAMLErrors into ValueErrors to prevent the yaml dependency
+        # from leaking out of this module.
+        raise ValueError(str(e))
+
+
 def load_service_config(path):
     try:
         with open(path) as f:
